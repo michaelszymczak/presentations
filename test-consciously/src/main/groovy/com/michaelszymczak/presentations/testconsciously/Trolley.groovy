@@ -2,7 +2,7 @@ package com.michaelszymczak.presentations.testconsciously
 
 class Trolley {
 
-    private final List<Map> items = []
+    private final List<LineItem> items = []
 
     int countItems() {
         if (items) {
@@ -14,14 +14,13 @@ class Trolley {
 
     BigDecimal total() {
         if (items) {
-            items.collect { it.product.price * it.quantity }.sum()
+            items.collect { it.totalPrice }.sum()
         } else {
             0.0
         }
     }
 
     void add(int quantity, Product product) {
-        Map lineItem = [product: product, quantity: quantity]
-        items.add(lineItem)
+        items.add(new LineItem(quantity, product))
     }
 }
